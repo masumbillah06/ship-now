@@ -1,37 +1,48 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/data-table"
-import { SectionCards } from "@/components/section-cards"
-import { SiteHeader } from "@/components/site-header"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { DashboardShell } from "@/components/DashboardShell";
+import { StatCard } from "@/components/StatCard";
+import { ShipmentStatisticChart } from "@/components/charts/ShipmentStatisticChart";
+import { ProfitSummaryChart } from "@/components/charts/ProfitSummaryChart";
+import { ShipmentTypeChart } from "@/components/charts/ShipmentTypeChart";
+import { ProductCategories } from "@/components/ProductCategories";
+import { TrackingCard } from "@/components/TrackingCard";
+import { ShipmentAlerts } from "@/components/ShipmentAlerts";
+import { RecentShipments } from "@/components/RecentShipments";
+import { RecentActivity } from "@/components/RecentActivity";
+import { stats } from "@/lib/data";
 
-import data from "./data.json"
-
-export default function Page() {
+export default function Home() {
   return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
-      <AppSidebar variant="inset" />
-      <SidebarInset>
-        <SiteHeader />
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
-              <div className="px-4 lg:px-6">
-                <ChartAreaInteractive />
-              </div>
-              <DataTable data={data} />
-            </div>
-          </div>
+    <DashboardShell>
+      <div className="space-y-6">
+        {/* Top stat row */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {stats.map((s) => (
+            <StatCard key={s.id} {...s} />
+          ))}
         </div>
-      </SidebarInset>
-    </SidebarProvider>
-  )
+
+        {/* Charts row */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <ShipmentStatisticChart />
+          <ProfitSummaryChart />
+          <ShipmentTypeChart />
+        </div>
+
+        {/* Categories / Tracking / Alerts row */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <ProductCategories />
+          <TrackingCard />
+          <ShipmentAlerts />
+        </div>
+
+        {/* Table + Activity row */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <RecentShipments />
+          </div>
+          <RecentActivity />
+        </div>
+      </div>
+    </DashboardShell>
+  );
 }
