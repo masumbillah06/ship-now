@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { Topbar } from "@/components/Topbar";
+import { Footer } from "./Footer";
 
 export function DashboardShell({
   children,
@@ -41,6 +42,7 @@ export function DashboardShell({
           )}
         </div>
         <div className="mt-6">{children}</div>
+        <Footer />
       </main>
     </div>
   );
