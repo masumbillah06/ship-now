@@ -73,7 +73,7 @@ function NavRow({
       />
       {!collapsed && <span className="flex-1 truncate">{label}</span>}
       {!collapsed && badge ? (
-        <span className="min-w-[20px] rounded-full bg-primary-500 px-1.5 py-0.5 text-center text-[11px] font-semibold text-white">
+        <span className="min-w-5 rounded-full bg-primary-500 px-1.5 py-0.5 text-center text-[11px] font-semibold text-white">
           {badge}
         </span>
       ) : null}
@@ -104,7 +104,7 @@ export function Sidebar({
       <aside
         className={cn(
           "z-50 flex h-screen flex-col border-r border-line bg-white transition-all duration-200",
-          collapsed ? "w-[84px]" : "w-[264px]",
+          collapsed ? "w-21" : "w-66",
           "fixed left-0 top-0 lg:sticky lg:top-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
@@ -139,7 +139,7 @@ export function Sidebar({
             collapsed && "mx-2 justify-center px-2"
           )}
         >
-          <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-primary-300 to-primary-600" />
+          <div className="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-primary-300 to-primary-600" />
           {!collapsed && (
             <>
               <div className="min-w-0 flex-1">

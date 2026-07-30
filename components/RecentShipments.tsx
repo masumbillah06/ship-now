@@ -101,7 +101,7 @@ export function RecentShipments() {
       </div>
 
       <div className="scrollbar-thin mt-4 overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse text-left">
+        <table className="w-full min-w-160 border-collapse text-left">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id} className="text-xs text-muted">

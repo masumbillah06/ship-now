@@ -216,7 +216,7 @@ export const recentActivity = [
 ];
 
 export const navItems = [
-  { label: "Dashboard", icon: "LayoutDashboard", href: "/" },
+  { label: "Dashboard", icon: "LayoutDashboard", href: "/dashboard" },
   { label: "Analytics", icon: "BarChart3", href: "/analytics" },
   { label: "Calendar", icon: "Calendar", href: "/calendar" },
   { label: "Shipments", icon: "Package", href: "/shipments" },
