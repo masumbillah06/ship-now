@@ -10,10 +10,10 @@ function LogoMark({ dark = false }: { dark?: boolean }) {
   return (
     <div className="relative w-6 h-6 shrink-0">
       <span
-        className={`absolute left-0 top-0 w-4 h-2.5 rounded-[2px] skew-x-[-20deg] ${color}`}
+        className={`absolute left-0 top-0 w-4 h-2.5 rounded-xs skew-x-[-20deg] ${color}`}
       />
       <span
-        className={`absolute right-0 bottom-0 w-4 h-2.5 rounded-[2px] skew-x-[-20deg] ${color}`}
+        className={`absolute right-0 bottom-0 w-4 h-2.5 rounded-xs skew-x-[-20deg] ${color}`}
       />
     </div>
   );
@@ -49,7 +49,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row bg-white">
       {/* Purple panel */}
-      <div className="relative w-full lg:w-1/2 lg:min-h-screen bg-gradient-to-br from-[#8B7CF6] to-[#6C5CE7] flex flex-col px-6 sm:px-10 lg:px-16 py-10 lg:py-12">
+      <div className="relative w-full lg:w-1/2 lg:min-h-screen bg-linear-to-br from-[#8B7CF6] to-[#6C5CE7] flex flex-col px-6 sm:px-10 lg:px-16 py-10 lg:py-12">
         <Logo dark />
 
         <div className="flex-1 flex items-center justify-center py-10 lg:py-12">
