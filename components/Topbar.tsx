@@ -3,7 +3,13 @@
 import { Search, Plus, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function Topbar({ onOpenMobile }: { onOpenMobile?: () => void }) {
+export function Topbar({
+  onOpenMobile,
+  addLabel = "Add New Shipping",
+}: {
+  onOpenMobile?: () => void;
+  addLabel?: string;
+}) {
   return (
     <div className="flex items-center gap-3">
       <Button
@@ -29,7 +35,7 @@ export function Topbar({ onOpenMobile }: { onOpenMobile?: () => void }) {
 
       <Button variant="default" className="hidden sm:inline-flex">
         <Plus size={16} />
-        Add New Shipping
+        {addLabel}
       </Button>
       <Button variant="default" size="icon" className="sm:hidden">
         <Plus size={18} />

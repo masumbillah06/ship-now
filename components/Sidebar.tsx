@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   BarChart3,
@@ -39,20 +41,22 @@ const icons: Record<string, React.ElementType> = {
 function NavRow({
   label,
   icon,
+  href,
   active,
   badge,
   collapsed,
 }: {
   label: string;
   icon: string;
+  href?: string;
   active?: boolean;
   badge?: number;
   collapsed?: boolean;
 }) {
   const Icon = icons[icon];
   return (
-    <a
-      href="#"
+    <Link
+      href={href ?? "#"}
       title={collapsed ? label : undefined}
       className={cn(
         "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
@@ -73,7 +77,7 @@ function NavRow({
           {badge}
         </span>
       ) : null}
-    </a>
+    </Link>
   );
 }
 
@@ -86,6 +90,7 @@ export function Sidebar({
   mobileOpen?: boolean;
   onCloseMobile?: () => void;
 }) {
+  const pathname = usePathname();
   return (
     <>
       {/* Mobile overlay */}
@@ -152,12 +157,17 @@ export function Sidebar({
 
         {/* Nav */}
         <nav className="scrollbar-thin flex-1 space-y-1 overflow-y-auto px-3">
-          {navItems.map((item, i) => (
+          {navItems.map((item) => (
             <NavRow
               key={item.label}
               label={item.label}
               icon={item.icon}
-              active={i === 0}
+              href={item.href}
+              active={
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(item.href)
+              }
               collapsed={collapsed}
             />
           ))}
@@ -186,6 +196,7 @@ export function Sidebar({
               key={item.label}
               label={item.label}
               icon={item.icon}
+              href={item.href}
               badge={item.badge}
               collapsed={collapsed}
             />
