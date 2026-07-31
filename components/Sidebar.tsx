@@ -16,7 +16,6 @@ import {
   Bell,
   Settings,
   ChevronDown,
-  Send,
   X,
 } from "lucide-react";
 import { navItems, bottomNavItems, currentUser } from "@/lib/data";
@@ -73,7 +72,7 @@ function NavRow({
       />
       {!collapsed && <span className="flex-1 truncate">{label}</span>}
       {!collapsed && badge ? (
-        <span className="min-w-5 rounded-full bg-primary-500 px-1.5 py-0.5 text-center text-[11px] font-semibold text-white">
+        <span className="min-w-[20px] rounded-full bg-primary-500 px-1.5 py-0.5 text-center text-[11px] font-semibold text-white">
           {badge}
         </span>
       ) : null}
@@ -104,7 +103,7 @@ export function Sidebar({
       <aside
         className={cn(
           "z-50 flex h-screen flex-col border-r border-line bg-white transition-all duration-200",
-          collapsed ? "w-21" : "w-66",
+          collapsed ? "w-[84px]" : "w-[264px]",
           "fixed left-0 top-0 lg:sticky lg:top-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
@@ -117,10 +116,10 @@ export function Sidebar({
           )}
         >
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-500">
-            <Send size={17} className="text-white" strokeWidth={2.2} />
+            <Truck size={18} className="text-white" strokeWidth={2.2} />
           </div>
           {!collapsed && (
-            <span className="text-lg font-bold tracking-tight text-ink-900">
+            <span className="text-lg font-bold uppercase tracking-wide text-ink-900">
               Shipnow
             </span>
           )}
@@ -139,7 +138,7 @@ export function Sidebar({
             collapsed && "mx-2 justify-center px-2"
           )}
         >
-          <div className="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-primary-300 to-primary-600" />
+          <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-primary-300 to-primary-600" />
           {!collapsed && (
             <>
               <div className="min-w-0 flex-1">
@@ -155,7 +154,8 @@ export function Sidebar({
           )}
         </div>
 
-        {/* Nav */}
+        {/* Nav — one continuous list: main items, then Message/Notification/Settings,
+            exactly as ordered in the design (no divider between the two groups). */}
         <nav className="scrollbar-thin flex-1 space-y-1 overflow-y-auto px-3">
           {navItems.map((item) => (
             <NavRow
@@ -171,11 +171,23 @@ export function Sidebar({
               collapsed={collapsed}
             />
           ))}
+
+          {bottomNavItems.map((item) => (
+            <NavRow
+              key={item.label}
+              label={item.label}
+              icon={item.icon}
+              href={item.href}
+              badge={item.badge}
+              active={pathname.startsWith(item.href)}
+              collapsed={collapsed}
+            />
+          ))}
         </nav>
 
-        {/* Promo card */}
+        {/* Promo card — pinned to the bottom of the sidebar, below all nav items */}
         {!collapsed && (
-          <div className="mx-4 mb-4 rounded-2xl bg-ink-900 p-4 text-white">
+          <div className="mx-4 mb-5 rounded-2xl bg-ink-900 p-4 text-white">
             <p className="text-sm font-semibold leading-snug">
               Loving ShipNow Free?
             </p>
@@ -188,20 +200,6 @@ export function Sidebar({
             </Button>
           </div>
         )}
-
-        {/* Bottom items */}
-        <div className="space-y-1 border-t border-line px-3 py-3">
-          {bottomNavItems.map((item) => (
-            <NavRow
-              key={item.label}
-              label={item.label}
-              icon={item.icon}
-              href={item.href}
-              badge={item.badge}
-              collapsed={collapsed}
-            />
-          ))}
-        </div>
       </aside>
     </>
   );
