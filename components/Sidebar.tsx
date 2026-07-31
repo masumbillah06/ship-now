@@ -16,6 +16,7 @@ import {
   Bell,
   Settings,
   ChevronDown,
+  Menu,
   X,
 } from "lucide-react";
 import { navItems, bottomNavItems, currentUser } from "@/lib/data";
@@ -59,7 +60,7 @@ function NavRow({
       title={collapsed ? label : undefined}
       className={cn(
         "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
-        collapsed && "justify-center px-2",
+        collapsed && "relative justify-center px-2",
         active
           ? "bg-primary-50 text-primary-600"
           : "text-ink-400 hover:bg-ink-50 hover:text-ink-700"
@@ -71,12 +72,38 @@ function NavRow({
         strokeWidth={2}
       />
       {!collapsed && <span className="flex-1 truncate">{label}</span>}
-      {!collapsed && badge ? (
-        <span className="min-w-[20px] rounded-full bg-primary-500 px-1.5 py-0.5 text-center text-[11px] font-semibold text-white">
-          {badge}
-        </span>
+      {badge ? (
+        collapsed ? (
+          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-primary-500" />
+        ) : (
+          <span className="min-w-[20px] rounded-full bg-primary-500 px-1.5 py-0.5 text-center text-[11px] font-semibold text-white">
+            {badge}
+          </span>
+        )
       ) : null}
     </Link>
+  );
+}
+
+/**
+ * Hamburger trigger for mobile — place this in your header/topbar
+ * (it's not part of the Sidebar's own DOM since the sidebar is
+ * off-canvas/hidden on mobile until opened).
+ *
+ *   <MobileMenuButton onClick={() => setMobileOpen(true)} />
+ *
+ * Only visible below the `md` breakpoint — tablet uses the collapsed
+ * (logo-only) rail instead, so no hamburger is needed there.
+ */
+export function MobileMenuButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label="Open menu"
+      className="flex h-9 w-9 items-center justify-center rounded-lg text-ink-500 hover:bg-ink-50 md:hidden"
+    >
+      <Menu size={22} />
+    </button>
   );
 }
 
@@ -90,12 +117,13 @@ export function Sidebar({
   onCloseMobile?: () => void;
 }) {
   const pathname = usePathname();
+
   return (
     <>
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-ink-900/40 lg:hidden"
+          className="fixed inset-0 z-40 bg-ink-900/40 md:hidden"
           onClick={onCloseMobile}
         />
       )}
@@ -104,11 +132,14 @@ export function Sidebar({
         className={cn(
           "z-50 flex h-screen flex-col border-r border-line bg-white transition-all duration-200",
           collapsed ? "w-[84px]" : "w-[264px]",
-          "fixed left-0 top-0 lg:sticky lg:top-0",
-          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          // Fixed on mobile (so it overlays content when opened),
+          // sticky from md upward (tablet + desktop) so it sits in flow.
+          "fixed left-0 top-0 md:sticky md:top-0",
+          // Off-canvas only below md; visible (translate-x-0) from md upward.
+          mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
       >
-        {/* Logo */}
+        {/* Logo — always visible, in every state (mobile, tablet-collapsed, desktop) */}
         <div
           className={cn(
             "flex items-center gap-2 px-5 py-6",
@@ -125,38 +156,37 @@ export function Sidebar({
           )}
           <button
             onClick={onCloseMobile}
-            className="ml-auto rounded-lg p-1.5 text-ink-400 hover:bg-ink-50 lg:hidden"
+            className="ml-auto rounded-lg p-1.5 text-ink-400 hover:bg-ink-50 md:hidden"
           >
             <X size={18} />
           </button>
         </div>
 
-        {/* User */}
-        <div
-          className={cn(
-            "mx-4 mb-4 flex items-center gap-2.5 rounded-xl border border-line px-3 py-2.5",
-            collapsed && "mx-2 justify-center px-2"
-          )}
-        >
-          <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-primary-300 to-primary-600" />
-          {!collapsed && (
-            <>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-ink-900">
-                  {currentUser.name}
-                </p>
-                <p className="truncate text-xs text-muted">
-                  {currentUser.role}
-                </p>
-              </div>
-              <ChevronDown size={16} className="shrink-0 text-ink-300" />
-            </>
-          )}
-        </div>
+        {/* User — hidden when collapsed (tablet rail shows icons only, no profile) */}
+        {!collapsed && (
+          <div className="mx-4 mb-4 flex items-center gap-2.5 rounded-xl border border-line px-3 py-2.5">
+            <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-primary-300 to-primary-600" />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-ink-900">
+                {currentUser.name}
+              </p>
+              <p className="truncate text-xs text-muted">
+                {currentUser.role}
+              </p>
+            </div>
+            <ChevronDown size={16} className="shrink-0 text-ink-300" />
+          </div>
+        )}
 
         {/* Nav — one continuous list: main items, then Message/Notification/Settings,
-            exactly as ordered in the design (no divider between the two groups). */}
-        <nav className="scrollbar-thin flex-1 space-y-1 overflow-y-auto px-3">
+            exactly as ordered in the design (no divider between the two groups).
+            Always rendered — collapsed just drops labels/text badges via NavRow. */}
+        <nav
+          className={cn(
+            "scrollbar-thin flex-1 space-y-1 overflow-y-auto",
+            collapsed ? "px-2" : "px-3"
+          )}
+        >
           {navItems.map((item) => (
             <NavRow
               key={item.label}
@@ -185,7 +215,7 @@ export function Sidebar({
           ))}
         </nav>
 
-        {/* Promo card — pinned to the bottom of the sidebar, below all nav items */}
+        {/* Promo card — hidden when collapsed (no room for the copy/CTA on the rail) */}
         {!collapsed && (
           <div className="mx-4 mb-5 rounded-2xl bg-ink-900 p-4 text-white">
             <p className="text-sm font-semibold leading-snug">
