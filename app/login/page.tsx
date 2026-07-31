@@ -53,9 +53,9 @@ export default function LoginPage() {
         <Logo dark />
 
         <div className="flex-1 flex items-center justify-center py-10 lg:py-12">
-          <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10">
+          <div className="relative w-80 h-80 sm:w-[27rem] sm:h-[27rem] lg:w-[34rem] lg:h-[34rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10">
             <Image
-              src="/shipnow-hero.jpg"
+              src="/ship.jpg"
               alt="Delivery illustration"
               fill
               className="object-cover"
