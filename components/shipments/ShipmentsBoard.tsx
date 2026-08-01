@@ -46,9 +46,6 @@ export function ShipmentsBoard() {
     return result;
   }, [activeTab, search, sort]);
 
-  // Note: the mock dataset only has 12 sample shipments even though the
-  // pagination footer mirrors the design's "520 results / 16 pages" — wire
-  // `shipments` up to a real paginated API and this slice can be removed.
   const visible = filtered.slice(0, pageSize);
 
   return (

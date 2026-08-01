@@ -13,7 +13,7 @@ export function DashboardShell({
 }: {
   children: React.ReactNode;
 
-  /** Replaces the default "Hello John! / Good Morning" greeting block. */
+  /** "Hello John! / Good Morning" greeting block. */
   header?: React.ReactNode;
 
   /** Label for the primary action button. */
@@ -48,7 +48,7 @@ export function DashboardShell({
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {/* Hamburger — only rendered/tappable below md (mobile) */}
+            {/* Hamburger — (mobile) */}
             <MobileMenuButton onClick={() => setMobileOpen(true)} />
 
             {header ?? (
