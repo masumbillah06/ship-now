@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Search, Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Sidebar, MobileMenuButton } from "@/components/Sidebar";
 import { Footer } from "./Footer";
+
 
 export function DashboardShell({
   children,
@@ -23,6 +25,7 @@ export function DashboardShell({
   showSearch?: boolean;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="flex min-h-screen bg-canvas">
@@ -75,21 +78,7 @@ export function DashboardShell({
                 <input
                   type="text"
                   placeholder="Search anything"
-                  className="
-                    h-[34px]
-                    w-full
-                    rounded-[7px]
-                    border-0
-                    bg-white
-                    pl-8
-                    pr-3
-                    text-xs
-                    text-ink-900
-                    placeholder:text-muted
-                    outline-none
-                    focus:ring-1
-                    focus:ring-gray-300
-                  "
+                  className="h-[34px] w-full rounded-[7px] border-0 bg-white pl-8 pr-3 text-xs text-ink-900 placeholder:text-muted outline-none focus:ring-1 focus:ring-gray-300"
                 />
               </div>
             )}
@@ -97,20 +86,8 @@ export function DashboardShell({
             {/* Add button */}
             <button
               type="button"
-              className="
-                flex
-                h-[34px]
-                items-center
-                gap-1.5
-                rounded-[7px]
-                bg-[#292929]
-                px-3.5
-                text-xs
-                font-medium
-                text-white
-                transition-colors
-                hover:bg-[#202020]
-              "
+              onClick={() => router.push("/addnewshipments")}
+              className="flex h-[34px] items-center gap-1.5 rounded-[7px] bg-[#292929] px-3.5 text-xs font-medium text-white transition-colors hover:bg-[#505050] cursor-pointer"
             >
               <Plus size={15} strokeWidth={1.8} />
 
