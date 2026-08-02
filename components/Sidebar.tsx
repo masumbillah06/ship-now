@@ -85,16 +85,7 @@ function NavRow({
   );
 }
 
-/**
- * Hamburger trigger for mobile — place this in your header/topbar
- * (it's not part of the Sidebar's own DOM since the sidebar is
- * off-canvas/hidden on mobile until opened).
- *
- *   <MobileMenuButton onClick={() => setMobileOpen(true)} />
- *
- * Only visible below the `md` breakpoint — tablet uses the collapsed
- * (logo-only) rail instead, so no hamburger is needed there.
- */
+
 export function MobileMenuButton({ onClick }: { onClick: () => void }) {
   return (
     <button
@@ -146,8 +137,16 @@ export function Sidebar({
             collapsed && "justify-center px-2"
           )}
         >
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-500">
-            <Truck size={18} className="text-white" strokeWidth={2.2} />
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center">
+            <svg
+              viewBox="0 0 40 40"
+              className="h-9 w-9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M17 6H26L21 18H12L17 6Z" fill="#7C6FF2" />
+              <path d="M22 20H31L26 32H17L22 20Z" fill="#8B5CF6" />
+            </svg>
           </div>
           {!collapsed && (
             <span className="text-lg font-bold uppercase tracking-wide text-ink-900">

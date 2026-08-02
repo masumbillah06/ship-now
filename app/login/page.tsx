@@ -6,16 +6,18 @@ import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
 
 function LogoMark({ dark = false }: { dark?: boolean }) {
-  const color = dark ? "bg-white" : "bg-[#6C5CE7]";
+  const colorA = dark ? "#FFFFFF" : "#7C6FF2";
+  const colorB = dark ? "#FFFFFF" : "#8B5CF6";
   return (
-    <div className="relative w-6 h-6 shrink-0">
-      <span
-        className={`absolute left-0 top-0 w-4 h-2.5 rounded-xs skew-x-[-20deg] ${color}`}
-      />
-      <span
-        className={`absolute right-0 bottom-0 w-4 h-2.5 rounded-xs skew-x-[-20deg] ${color}`}
-      />
-    </div>
+    <svg
+      viewBox="0 0 40 40"
+      className="w-10 h-10 shrink-0"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M17 6H26L21 18H12L17 6Z" fill={colorA} />
+      <path d="M22 20H31L26 32H17L22 20Z" fill={colorB} />
+    </svg>
   );
 }
 
