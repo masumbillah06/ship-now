@@ -13,33 +13,36 @@ import { stats } from "@/lib/data";
 export default function Home() {
   return (
     <DashboardShell>
-      <div className="space-y-6">
-        {/* Top stat row */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {stats.map((s) => (
-            <StatCard key={s.id} {...s} />
-          ))}
-        </div>
-
-        {/* Charts row */}
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <ShipmentStatisticChart />
-          <ProfitSummaryChart />
-          <ShipmentTypeChart />
-        </div>
-
-        {/* Categories / Tracking / Alerts row */}
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <ProductCategories />
-          <TrackingCard />
-          <ShipmentAlerts />
-        </div>
-
-        {/* Table + Activity row */}
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <RecentShipments />
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        {/* Main column (2/3) */}
+        <div className="space-y-4 lg:col-span-2">
+          {/* Stat cards row - confined to main column only */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {stats.map((s) => (
+              <StatCard key={s.id} {...s} />
+            ))}
           </div>
+
+          {/* Shipment Statistic + Profit Summary */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <ShipmentStatisticChart />
+            <ProfitSummaryChart />
+          </div>
+
+          {/* Product Categories + Tracking */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <ProductCategories />
+            <TrackingCard />
+          </div>
+
+          {/* Recent Shipments - full width of main column */}
+          <RecentShipments />
+        </div>
+
+        {/* Sidebar column (1/3) - spans full height of main column */}
+        <div className="space-y-4">
+          <ShipmentTypeChart />
+          <ShipmentAlerts />
           <RecentActivity />
         </div>
       </div>

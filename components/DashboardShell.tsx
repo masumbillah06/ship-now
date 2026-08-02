@@ -72,7 +72,7 @@ export function DashboardShell({
                 <Search
                   size={17}
                   strokeWidth={1.8}
-                  className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-muted"
+                  className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-ink-900"
                 />
 
                 <input
