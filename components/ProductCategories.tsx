@@ -1,3 +1,4 @@
+import { MoreHorizontal } from "lucide-react";
 import { productCategories } from "@/lib/data";
 
 export function ProductCategories() {
@@ -5,11 +6,19 @@ export function ProductCategories() {
     <div className="card">
       <div className="flex items-center justify-between">
         <p className="card-title">Product Categories</p>
-        <span className="text-xs text-muted">
-          Total Products{" "}
-          <span className="font-semibold text-ink-900">
-            {productCategories.total}
-          </span>
+        <button
+          type="button"
+          aria-label="More options"
+          className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink-50 text-ink-400 hover:bg-ink-100"
+        >
+          <MoreHorizontal size={16} />
+        </button>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between">
+        <span className="text-sm text-muted">Total Products</span>
+        <span className="text-2xl font-bold text-ink-900">
+          {productCategories.total}
         </span>
       </div>
 

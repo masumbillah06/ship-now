@@ -8,7 +8,7 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Search } from "lucide-react";
+import { Search, ChevronsUpDown } from "lucide-react";
 import { recentShipments } from "@/lib/data";
 import { Badge, type BadgeProps } from "@/components/ui/badge";
 
@@ -104,16 +104,32 @@ export function RecentShipments() {
         <table className="w-full min-w-160 border-collapse text-left">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id} className="text-xs text-muted">
-                {headerGroup.headers.map((header) => (
+              <tr key={headerGroup.id} className="bg-primary-50 text-xs text-ink-700">
+                <th className="w-10 whitespace-nowrap rounded-l-lg py-3 pl-3">
+                  <input
+                    type="checkbox"
+                    aria-label="Select all shipments"
+                    readOnly
+                    className="h-3.5 w-3.5 rounded border-line accent-primary-500"
+                  />
+                </th>
+                {headerGroup.headers.map((header, i) => (
                   <th
                     key={header.id}
-                    className="whitespace-nowrap pb-3 pr-4 font-medium first:pl-0"
+                    className={
+                      "whitespace-nowrap py-3 pr-4 font-medium" +
+                      (i === headerGroup.headers.length - 1
+                        ? " rounded-r-lg"
+                        : "")
+                    }
                   >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
+                    <span className="inline-flex items-center gap-1">
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                      <ChevronsUpDown size={12} className="text-ink-300" />
+                    </span>
                   </th>
                 ))}
               </tr>
@@ -122,11 +138,16 @@ export function RecentShipments() {
           <tbody>
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id} className="border-t border-line">
+                <td className="whitespace-nowrap py-3 pl-3">
+                  <input
+                    type="checkbox"
+                    aria-label={`Select shipment ${row.original.id}`}
+                    readOnly
+                    className="h-3.5 w-3.5 rounded border-line accent-primary-500"
+                  />
+                </td>
                 {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className="whitespace-nowrap py-3 pr-4 first:pl-0"
-                  >
+                  <td key={cell.id} className="whitespace-nowrap py-3 pr-4">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -135,7 +156,7 @@ export function RecentShipments() {
             {table.getRowModel().rows.length === 0 && (
               <tr>
                 <td
-                  colSpan={columns.length}
+                  colSpan={columns.length + 1}
                   className="py-6 text-center text-xs text-muted"
                 >
                   No shipments match your search.
