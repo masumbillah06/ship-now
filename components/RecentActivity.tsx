@@ -29,7 +29,7 @@ export function RecentActivity() {
         <button
           type="button"
           aria-label="More options"
-          className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink-50 text-ink-400 hover:bg-ink-100"
+          className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-100 text-ink-400 hover:bg-ink-100"
         >
           <MoreHorizontal size={16} />
         </button>

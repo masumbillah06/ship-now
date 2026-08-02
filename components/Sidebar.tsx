@@ -227,12 +227,12 @@ export function Sidebar({
 
         {/* Promo card — hidden when collapsed (no room for the copy/CTA on the rail) */}
         {!collapsed && (
-          <div className="mx-4 mb-5 overflow-hidden rounded-2xl border border-violet-500/20 bg-gradient-to-br from-[#1E1A35] via-[#17142A] to-[#0F0D1A] p-5 shadow-lg">
+          <div className="mx-4 mb-5 overflow-hidden rounded-xl border border-violet-500/20 bg-gradient-to-br from-[#1E1A35] via-[#17142A] to-[#0F0D1A] p-3 shadow-lg">
             {/* Logo */}
             <Logo dark />
 
             {/* Content */}
-            <div className="mt-5">
+            <div className="mt-1">
               <h3 className="text-base font-semibold leading-tight text-white">
                 Loving ShipNow Free?
               </h3>
@@ -247,7 +247,7 @@ export function Sidebar({
             <Button
               variant="primary"
               size="sm"
-              className="mt-5 w-full rounded-lg bg-slate-50 hover:bg-slate-300 text-slate-900"
+              className="mt-5 w-full rounded-lg bg-slate-50 hover:bg-slate-300 text-slate-900 cursor-pointer"
             >
               Go Pro Today
             </Button>

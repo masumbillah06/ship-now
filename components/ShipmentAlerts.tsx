@@ -26,7 +26,7 @@ export function ShipmentAlerts() {
         <button
           type="button"
           aria-label="More options"
-          className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink-50 text-ink-400 hover:bg-ink-100"
+          className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-100 text-ink-400 hover:bg-ink-100"
         >
           <MoreHorizontal size={16} />
         </button>
@@ -43,7 +43,7 @@ export function ShipmentAlerts() {
         {shipmentAlerts.summary.map((s) => (
           <div
             key={s.label}
-            className="rounded-2xl bg-primary-50 px-2.5 py-3 text-center"
+            className="rounded-2xl bg-violet-200 px-2.5 py-3 text-center"
           >
             <p className="text-xl font-bold text-ink-900">{s.count}</p>
             <p className="mt-1 text-[10px] leading-tight text-ink-700">

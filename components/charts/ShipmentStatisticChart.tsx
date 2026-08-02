@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -42,7 +43,7 @@ const CustomBar = (props: RectangleProps) => {
         y1={y}
         x2={x + width}
         y2={y}
-        stroke="#0F172A" // slate-900
+        stroke="#0F172A"
         strokeWidth={2}
         strokeLinecap="round"
       />
@@ -53,12 +54,7 @@ const CustomBar = (props: RectangleProps) => {
 export function ShipmentStatisticChart() {
   const { data } = shipmentStatistic;
 
-  const peakIndex = Math.max(
-    0,
-    data.findIndex((d) => d.highlight)
-  );
-
-  const peakPercent = ((peakIndex + 0.5) / data.length) * 100;
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
     <div className="card">
@@ -84,32 +80,10 @@ export function ShipmentStatisticChart() {
       </div>
 
       <div className="relative mt-4 h-47.5">
-        {/* Peak Tooltip */}
-        <div
-          className="pointer-events-none absolute top-0 z-10 flex -translate-x-1/2 flex-col items-center"
-          style={{
-            left: `calc(${Y_AXIS_WIDTH}px + (100% - ${Y_AXIS_WIDTH}px) * ${
-              peakPercent / 100
-            })`,
-          }}
-        >
-          <div className="rounded-lg bg-ink-900 px-3 py-1.5 text-center shadow-popover">
-            <p className="text-[10px] leading-none text-ink-300">
-              {shipmentStatistic.peakLabel}
-            </p>
-
-            <p className="mt-1 text-xs font-semibold leading-none text-white">
-              {shipmentStatistic.peakValue}
-            </p>
-          </div>
-
-          <div className="h-3 w-px bg-ink-900/30" />
-        </div>
-
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
-            margin={{ top: 40, right: 0, left: 0, bottom: 0 }}
+            margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
             barCategoryGap="-20%"
             barGap={-2}
           >
@@ -118,9 +92,7 @@ export function ShipmentStatisticChart() {
               axisLine={false}
               tickLine={false}
               tick={{ fill: "#8B8D97", fontSize: 10 }}
-              tickFormatter={(v: number) =>
-                `${(v / 1000).toFixed(1)}K`
-              }
+              tickFormatter={(v: number) => `${(v / 1000).toFixed(1)}K`}
             />
 
             <XAxis
@@ -143,11 +115,13 @@ export function ShipmentStatisticChart() {
               dataKey="value"
               shape={<CustomBar />}
               barSize={48}
+              onMouseMove={(_, index) => setActiveIndex(index)}
+              onMouseLeave={() => setActiveIndex(null)}
             >
-              {data.map((d, i) => (
+              {data.map((_, i) => (
                 <Cell
                   key={i}
-                  fill={d.highlight ? "#14132B" : "#E9E3FF"}
+                  fill={activeIndex === i ? "#A78BFA" : "#E9E3FF"}
                 />
               ))}
             </Bar>

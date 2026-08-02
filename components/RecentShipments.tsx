@@ -104,7 +104,7 @@ export function RecentShipments() {
         <table className="w-full min-w-160 border-collapse text-left">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id} className="bg-primary-50 text-xs text-ink-700">
+              <tr key={headerGroup.id} className="bg-violet-200 text-xs text-ink-700">
                 <th className="w-10 whitespace-nowrap rounded-l-lg py-3 pl-3">
                   <input
                     type="checkbox"
