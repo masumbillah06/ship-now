@@ -33,7 +33,7 @@ export function ProfitSummaryChart() {
         </select>
       </div>
 
-      <div className="mt-3 flex items-center gap-4">
+      <div className="mt-2 flex items-center gap-4">
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-[#7C5CFC]" />
           <span className="text-xs text-muted">Revenue</span>
