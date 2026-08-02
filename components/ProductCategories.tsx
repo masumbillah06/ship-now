@@ -6,6 +6,7 @@ export function ProductCategories() {
     <div className="card">
       <div className="flex items-center justify-between">
         <p className="card-title">Product Categories</p>
+
         <button
           type="button"
           aria-label="More options"
@@ -22,24 +23,33 @@ export function ProductCategories() {
         </span>
       </div>
 
-      <div className="mt-4 flex h-2.5 w-full overflow-hidden rounded-full">
+      {/* Progress Bar */}
+      <div className="mt-5 flex h-15 w-full overflow-hidden rounded-lg bg-[#F3F4F6]">
         {productCategories.data.map((d) => (
           <div
             key={d.name}
-            style={{ width: `${d.percent}%`, backgroundColor: d.color }}
+            style={{
+              width: `${d.percent}%`,
+              backgroundColor: d.color,
+            }}
           />
         ))}
       </div>
 
-      <ul className="mt-4 space-y-3">
+      <ul className="mt-5 space-y-3">
         {productCategories.data.map((d) => (
           <li key={d.name} className="flex items-center gap-2.5 text-sm">
             <span
               className="h-2 w-2 shrink-0 rounded-full"
               style={{ backgroundColor: d.color }}
             />
+
             <span className="flex-1 truncate text-ink-700">{d.name}</span>
-            <span className="text-xs text-muted">{d.value} products</span>
+
+            <span className="text-xs text-muted">
+              {d.value} products
+            </span>
+
             <span className="w-9 text-right text-xs font-semibold text-ink-900">
               {d.percent}%
             </span>
