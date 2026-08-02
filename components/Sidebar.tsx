@@ -23,6 +23,17 @@ import { navItems, bottomNavItems, currentUser } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+function Logo({ dark }: { dark?: boolean }) {
+  return (
+    <div className="flex h-9 w-9 items-center justify-center">
+      <svg viewBox="0 0 40 40" className="h-9 w-9" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 6H26L21 18H12L17 6Z" fill={dark ? "#7C6FF2" : "#7C6FF2"} />
+        <path d="M22 20H31L26 32H17L22 20Z" fill={dark ? "#8B5CF6" : "#8B5CF6"} />
+      </svg>
+    </div>
+  );
+}
+
 const icons: Record<string, React.ElementType> = {
   LayoutDashboard,
   BarChart3,
@@ -216,15 +227,28 @@ export function Sidebar({
 
         {/* Promo card — hidden when collapsed (no room for the copy/CTA on the rail) */}
         {!collapsed && (
-          <div className="mx-4 mb-5 rounded-2xl bg-ink-900 p-4 text-white">
-            <p className="text-sm font-semibold leading-snug">
-              Loving ShipNow Free?
-            </p>
-            <p className="mt-1 text-xs leading-relaxed text-ink-300">
-              Go Pro to access priority support, real-time tracking, and full
-              analytics.
-            </p>
-            <Button variant="primary" size="sm" className="mt-3 w-full">
+          <div className="mx-4 mb-5 overflow-hidden rounded-2xl border border-violet-500/20 bg-gradient-to-br from-[#1E1A35] via-[#17142A] to-[#0F0D1A] p-5 shadow-lg">
+            {/* Logo */}
+            <Logo dark />
+
+            {/* Content */}
+            <div className="mt-5">
+              <h3 className="text-base font-semibold leading-tight text-white">
+                Loving ShipNow Free?
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-gray-300">
+                Go Pro to access priority support,
+                real-time tracking, and full analytics.
+              </p>
+            </div>
+
+            {/* Button */}
+            <Button
+              variant="primary"
+              size="sm"
+              className="mt-5 w-full rounded-lg bg-slate-50 hover:bg-slate-300 text-slate-900"
+            >
               Go Pro Today
             </Button>
           </div>
