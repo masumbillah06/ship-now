@@ -43,7 +43,7 @@ const CustomBar = (props: RectangleProps) => {
         x2={x + width}
         y2={y}
         stroke="#0F172A" // slate-900
-        strokeWidth={3}
+        strokeWidth={2}
         strokeLinecap="round"
       />
     </g>
@@ -83,7 +83,7 @@ export function ShipmentStatisticChart() {
         </select>
       </div>
 
-      <div className="relative mt-4 h-[190px]">
+      <div className="relative mt-4 h-47.5">
         {/* Peak Tooltip */}
         <div
           className="pointer-events-none absolute top-0 z-10 flex -translate-x-1/2 flex-col items-center"

@@ -23,7 +23,7 @@ function iconForAction(action: string) {
 
 export function RecentActivity() {
   return (
-    <div className="card">
+    <div className="card py-5">
       <div className="flex items-center justify-between">
         <p className="card-title">Recent Activity</p>
         <button
@@ -35,7 +35,7 @@ export function RecentActivity() {
         </button>
       </div>
 
-      <ul className="mt-4 space-y-4">
+      <ul className="mt-5 space-y-5">
         {recentActivity.map((a, i) => {
           const Icon = iconForAction(a.action);
           return (

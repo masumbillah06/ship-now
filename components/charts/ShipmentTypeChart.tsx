@@ -18,7 +18,7 @@ export function ShipmentTypeChart() {
   const totalValue = shipmentType.data.reduce((sum, d) => sum + d.value, 0);
 
   return (
-    <div className="card">
+    <div className="card py-5">
       <div className="flex items-center justify-between">
         <p className="card-title">Shipment Type</p>
         <button className="flex h-7 w-7 items-center justify-center rounded-lg bg-surface-100 text-ink-500">
@@ -26,7 +26,7 @@ export function ShipmentTypeChart() {
         </button>
       </div>
 
-      <div className="relative mx-auto mt-2 h-[170px] w-[170px]">
+      <div className="relative mx-auto mt-2 h-55 w-55">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -55,7 +55,7 @@ export function ShipmentTypeChart() {
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-4">
+      <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-5">
         {shipmentType.data.map((d) => {
           const percent =
             d.percent ?? Math.round((d.value / totalValue) * 100);

@@ -175,7 +175,7 @@ export function Sidebar({
         {/* User — hidden when collapsed (tablet rail shows icons only, no profile) */}
         {!collapsed && (
           <div className="mx-4 mb-4 flex items-center gap-2.5 rounded-xl border border-line px-3 py-2.5">
-            <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-primary-300 to-primary-600" />
+            <div className="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-primary-300 to-primary-600" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-ink-900">
                 {currentUser.name}

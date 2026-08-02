@@ -20,7 +20,7 @@ function iconForReason(reason: string) {
 
 export function ShipmentAlerts() {
   return (
-    <div className="card">
+    <div className="card py-5">
       <div className="flex items-center justify-between">
         <p className="card-title">Shipment Alerts</p>
         <button
@@ -39,7 +39,7 @@ export function ShipmentAlerts() {
         <span className="text-sm text-muted">{shipmentAlerts.totalLabel}</span>
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-2">
+      <div className="mt-5 grid grid-cols-3 gap-3">
         {shipmentAlerts.summary.map((s) => (
           <div
             key={s.label}
@@ -53,7 +53,7 @@ export function ShipmentAlerts() {
         ))}
       </div>
 
-      <ul className="mt-4 space-y-3">
+      <ul className="mt-5 space-y-5">
         {shipmentAlerts.items.map((item) => {
           const Icon = iconForReason(item.reason);
           return (
