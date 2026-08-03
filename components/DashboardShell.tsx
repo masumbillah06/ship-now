@@ -12,6 +12,7 @@ export function DashboardShell({
   header,
   addLabel = "Add New Shipping",
   showSearch = true,
+  actions,
 }: {
   children: React.ReactNode;
 
@@ -23,6 +24,9 @@ export function DashboardShell({
 
   /** Whether to show the search bar in the header. */
   showSearch?: boolean;
+
+  /** Overrides the default search + add-button header actions entirely. */
+  actions?: React.ReactNode;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const router = useRouter();
@@ -66,35 +70,37 @@ export function DashboardShell({
 
           {/* Header actions */}
           <div className="flex items-center gap-2">
-            {/* Search */}
-            {showSearch && (
-              <div className="relative hidden sm:block w-[238px]">
-                <Search
-                  size={17}
-                  strokeWidth={1.8}
-                  className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-ink-900"
-                />
+            {actions ?? (
+              <>
+                {/* Search */}
+                {showSearch && (
+                  <div className="relative hidden sm:block w-[238px]">
+                    <Search
+                      size={17}
+                      strokeWidth={1.8}
+                      className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-ink-900"
+                    />
 
-                <input
-                  type="text"
-                  placeholder="Search anything"
-                  className="h-[34px] w-full rounded-[7px] border-0 bg-white pl-8 pr-3 text-xs text-ink-900 placeholder:text-muted outline-none focus:ring-1 focus:ring-gray-300"
-                />
-              </div>
+                    <input
+                      type="text"
+                      placeholder="Search anything"
+                      className="h-[34px] w-full rounded-[7px] border-0 bg-white pl-8 pr-3 text-xs text-ink-900 placeholder:text-muted outline-none focus:ring-1 focus:ring-gray-300"
+                    />
+                  </div>
+                )}
+
+                {/* Add button */}
+                <button
+                  type="button"
+                  onClick={() => router.push("/addnewshipments")}
+                  className="flex h-[34px] items-center gap-1.5 rounded-[7px] bg-[#292929] px-3.5 text-xs font-medium text-white transition-colors hover:bg-[#505050] cursor-pointer"
+                >
+                  <Plus size={15} strokeWidth={1.8} />
+
+                  <span className="hidden sm:inline">{addLabel}</span>
+                </button>
+              </>
             )}
-
-            {/* Add button */}
-            <button
-              type="button"
-              onClick={() => router.push("/addnewshipments")}
-              className="flex h-[34px] items-center gap-1.5 rounded-[7px] bg-[#292929] px-3.5 text-xs font-medium text-white transition-colors hover:bg-[#505050] cursor-pointer"
-            >
-              <Plus size={15} strokeWidth={1.8} />
-
-              <span className="hidden sm:inline">
-                {addLabel}
-              </span>
-            </button>
           </div>
         </div>
 
