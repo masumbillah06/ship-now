@@ -7,7 +7,7 @@ export function WarehouseStatCards() {
       {warehouseStats.map((s) => (
         <div key={s.id} className="card">
           <p className="text-xs font-medium text-muted">{s.label}</p>
-          <div className="mt-2 flex items-end justify-between">
+          <div className="mt-5 flex items-end justify-between">
             <p className="text-2xl font-bold leading-7 text-ink-900">
               {s.value}
               {s.unit && (

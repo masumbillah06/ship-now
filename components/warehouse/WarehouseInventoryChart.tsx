@@ -1,7 +1,15 @@
 "use client";
 
 import { MoreHorizontal } from "lucide-react";
-import { BarChart, Bar, ResponsiveContainer, Cell } from "recharts";
+import {
+  BarChart,
+  Bar,
+  ResponsiveContainer,
+  Cell,
+  LabelList,
+  XAxis,
+  CartesianGrid,
+} from "recharts";
 import { warehouseInventory } from "@/lib/warehouse-data";
 
 export function WarehouseInventoryChart() {
@@ -24,43 +32,69 @@ export function WarehouseInventoryChart() {
         </span>
       </p>
 
-      {/* Legend chips */}
-      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5">
-        {warehouseInventory.data.map((d) => (
-          <div key={d.name} className="flex items-center gap-1.5">
-            <span
-              className="h-2 w-2 shrink-0 rounded-full"
-              style={{ backgroundColor: d.color }}
-            />
-            <span className="text-xs text-ink-500">{d.name}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Bars */}
-      <div className="mt-4 h-[110px]">
+      {/* Chart */}
+      <div className="mt-6 h-[240px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={warehouseInventory.data}
-            barCategoryGap="24%"
-            margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+            barCategoryGap="10%"
+            margin={{ top: 32, right: 0, left: 0, bottom: 8 }}
           >
-            <Bar dataKey="percent" radius={[6, 6, 6, 6]} maxBarSize={36}>
+            {/* Dotted muted vertical lines between bars */}
+            <CartesianGrid
+              vertical={true}
+              horizontal={false}
+              stroke="#d1d5db"
+              strokeDasharray="2 4"
+              strokeOpacity={0.7}
+            />
+
+            <XAxis
+              dataKey="name"
+              axisLine={false}
+              tickLine={false}
+              tick={false}
+            />
+
+            <Bar
+              dataKey="percent"
+              radius={8}
+              maxBarSize={64}
+              background={{ fill: "#f3f4f6", radius: 8 }}
+            >
               {warehouseInventory.data.map((d) => (
                 <Cell key={d.name} fill={d.color} />
               ))}
+
+              {/* Category labels – fixed at the same height above every bar */}
+              <LabelList
+                dataKey="name"
+                content={({ x, width, value }) => (
+                  <text
+                    x={Number(x) + Number(width) / 2}
+                    y={16}
+                    textAnchor="middle"
+                    fontSize={12}
+                    fontWeight={500}
+                    fill="#6b7280"
+                  >
+                    {value}
+                  </text>
+                )}
+              />
             </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Percent / value labels under each bar */}
-      <div className="mt-2 grid grid-cols-6 gap-1 text-center">
+      {/* Percent · value labels – pulled very close to the bars */}
+      <div className="-mt-7 grid grid-cols-6 gap-1 text-center">
         {warehouseInventory.data.map((d) => (
           <div key={d.name}>
-            <p className="text-xs font-semibold text-ink-900">{d.percent}%</p>
-            <p className="text-[11px] text-muted">
-              {d.value.toLocaleString()}
+            <p className="text-xs font-medium text-ink-900">
+              {d.percent}%
+              <span className="mx-1 text-muted">·</span>
+              <span className="text-muted">{d.value.toLocaleString()}</span>
             </p>
           </div>
         ))}
