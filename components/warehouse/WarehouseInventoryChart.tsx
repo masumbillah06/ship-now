@@ -37,10 +37,10 @@ export function WarehouseInventoryChart() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={warehouseInventory.data}
-            barCategoryGap="10%"
+            barCategoryGap="4%"          // tighter gap → thicker bars
             margin={{ top: 32, right: 0, left: 0, bottom: 8 }}
           >
-            {/* Dotted muted vertical lines between bars */}
+            {/* Vertical muted dotted lines between bars */}
             <CartesianGrid
               vertical={true}
               horizontal={false}
@@ -59,7 +59,7 @@ export function WarehouseInventoryChart() {
             <Bar
               dataKey="percent"
               radius={8}
-              maxBarSize={64}
+              maxBarSize={80}             // increased from 64
               background={{ fill: "#f3f4f6", radius: 8 }}
             >
               {warehouseInventory.data.map((d) => (

@@ -23,7 +23,7 @@ export default function WarehousePage() {
     >
       <div className="flex flex-col gap-4 lg:flex-row">
         {/* Main column */}
-        <div className="flex flex-col gap-4 lg:w-[66%]">
+        <div className="flex flex-col gap-4 lg:w-[70%]">
           <div className="flex flex-col gap-4 sm:flex-row">
             <WarehouseStatCards />
             <div className="sm:flex-1">
@@ -35,7 +35,7 @@ export default function WarehousePage() {
         </div>
 
         {/* Side column */}
-        <div className="flex flex-col gap-4 lg:w-[34%]">
+        <div className="flex flex-col gap-4 lg:w-[30%]">
           <CapacityUsageCard />
           <PackageStatusCard />
           <WarehouseActivityLogCard />
