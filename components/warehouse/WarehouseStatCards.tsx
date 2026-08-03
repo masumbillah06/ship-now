@@ -3,7 +3,7 @@ import { warehouseStats } from "@/lib/warehouse-data";
 
 export function WarehouseStatCards() {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div className="flex flex-col gap-4 sm:w-[220px] sm:shrink-0">
       {warehouseStats.map((s) => (
         <div key={s.id} className="card">
           <p className="text-xs font-medium text-muted">{s.label}</p>
