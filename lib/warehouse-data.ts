@@ -1,3 +1,10 @@
+import {
+  Truck,
+  Train,
+  Ship,
+  Plane,
+} from "lucide-react";
+
 export const warehouseStats = [
   {
     id: "total-sku",
@@ -26,10 +33,26 @@ export const warehouseStats = [
 ];
 
 export const freightTabs = [
-  { label: "Road Freight", active: true },
-  { label: "Rail Freight", active: false },
-  { label: "Ocean Freight", active: false },
-  { label: "Air Freight", active: false },
+  {
+    label: "Road Freight",
+    icon: Truck,
+    active: true,
+  },
+  {
+    label: "Rail Freight",
+    icon: Train,
+    active: false,
+  },
+  {
+    label: "Ocean Freight",
+    icon: Ship,
+    active: false,
+  },
+  {
+    label: "Air Freight",
+    icon: Plane,
+    active: false,
+  },
 ];
 
 export const warehouseInventory = {
@@ -71,24 +94,25 @@ export const packageStatusBadgeVariant: Record<
   Expected: "warning",
 };
 
-export const packageStatusList: Array<{
-  id: string;
-  date: string;
-  status: PackageStatus;
-}> = [
-  { id: "PKG-HK77420", date: "March 20, 2035 05:30 PM", status: "Sent" },
-  { id: "PKG-A50812", date: "March 21, 2035 01:45 PM", status: "Received" },
-  { id: "PKG-E10293", date: "March 22, 2035 09:00 AM", status: "Expected" },
+export const packageStatusList = [
+  {
+    id: "PKG-HK77420",
+    date: "March 20, 2035 05:30 PM",
+    status: "Sent" as const,
+  },
+  {
+    id: "PKG-A50812",
+    date: "March 21, 2035 01:45 PM",
+    status: "Received" as const,
+  },
+  {
+    id: "PKG-E10293",
+    date: "March 22, 2035 09:00 AM",
+    status: "Expected" as const,
+  },
 ];
 
-export const warehouseStorage: Array<{
-  floor: number;
-  section: string;
-  category: string;
-  storageUsedPercent: number;
-  availableSpace: number;
-  totalSpace: number;
-}> = [
+export const warehouseStorage = [
   {
     floor: 1,
     section: "A1 - A10",
@@ -133,13 +157,7 @@ export const warehouseStorage: Array<{
 
 export const warehouseFloors = ["Floor 1", "Floor 2", "Floor 3"];
 
-export const warehouseMap: Array<{
-  category: string;
-  slots: string[];
-  availableSpace: number;
-  totalSpace: number;
-  full?: boolean;
-}> = [
+export const warehouseMap = [
   {
     category: "Electronics",
     slots: ["A1", "A2", "A3"],
@@ -179,13 +197,7 @@ export const warehouseMap: Array<{
   },
 ];
 
-export const warehouseActivityLog: Array<{
-  id: number;
-  actor: string;
-  action: string;
-  time: string;
-  color: string;
-}> = [
+export const warehouseActivityLog = [
   {
     id: 1,
     actor: "Leo Fernandez",
@@ -197,7 +209,8 @@ export const warehouseActivityLog: Array<{
   {
     id: 2,
     actor: "Ava Martinez",
-    action: "added 25 units of Smart Router Kit to Section A1 (Electronics)",
+    action:
+      "added 25 units of Smart Router Kit to Section A1 (Electronics)",
     time: "09:15 AM",
     color: "#F5A623",
   },

@@ -10,23 +10,35 @@ export function FreightTabs() {
   );
 
   return (
-    <div className="flex items-center gap-2">
-      {freightTabs.map((tab, i) => (
-        <button
-          key={tab.label}
-          type="button"
-          onClick={() => setActive(tab.label)}
-          className={cn(
-            "h-[34px] shrink-0 rounded-[7px] px-3.5 text-xs font-medium whitespace-nowrap transition-colors cursor-pointer",
-            i > 0 && "hidden md:inline-flex",
-            active === tab.label
-              ? "bg-[#292929] text-white hover:bg-[#505050]"
-              : "border border-line bg-white text-ink-500 hover:bg-ink-50 hover:text-ink-700"
-          )}
-        >
-          {tab.label}
-        </button>
-      ))}
+    <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+      {freightTabs.map((tab, i) => {
+        const Icon = tab.icon;
+
+        return (
+          <button
+            key={tab.label}
+            type="button"
+            onClick={() => setActive(tab.label)}
+            className={cn(
+              "inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer",
+              i > 0 && "hidden md:inline-flex",
+              active === tab.label
+                ? "bg-[#292929] text-white shadow-sm hover:bg-[#3b3b3b]"
+                : "border border-line bg-white text-ink-600 hover:bg-ink-50 hover:text-ink-900"
+            )}
+          >
+            <Icon
+              className={cn(
+                "h-4 w-4 shrink-0",
+                active === tab.label ? "text-white" : "text-primary-500"
+              )}
+              strokeWidth={2}
+            />
+
+            <span>{tab.label}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
